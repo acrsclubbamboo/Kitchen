@@ -20,7 +20,7 @@
           // Loop over each row in the data
           data.forEach((row, index) => {
             // Skip rows that don't have the necessary columns
-            if (row.length < 4) {
+            if (row.length < 7) {
               return;
             }
 
@@ -29,7 +29,8 @@
             table.appendChild(tableRow);
 
             // For each cell in the row, add a table cell
-            for (var i = 0; i < 4; i++) {
+            // Start at column 2 (C) and end at column 6 (G)
+            for (var i = 2; i < 7; i++) {
               var tableCell = document.createElement(index === 0 ? 'th' : 'td');
               tableCell.textContent = row[i];
               tableRow.appendChild(tableCell);
