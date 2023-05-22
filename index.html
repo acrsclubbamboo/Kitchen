@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Auto-refreshing Page</title>
-        <script type="text/javascript">
-            function refreshPage() {
-                location.reload();
-            }
-            setTimeout(refreshPage, 300000);
-        </script>
-    </head>
-    <body style="margin:0px;padding:0px;overflow:hidden">
-        <iframe src="https://docs.google.com/spreadsheets/d/1Nnai86oWvr0yEd-vFAtRHE28iYY6f2EKyUw-kM8A5Gs/pubhtml" style="overflow:hidden;height:2000px;width:100%" frameborder="0"></iframe>
-    </body>
+  <head>
+    <!-- Other head tags here -->
+    <script>
+      setInterval(function() {
+        fetch('https://script.google.com/macros/s/AKfycbw6HdkhKYFk-CX7wzGC3CAz4aHJo2ZNDzxYQbY_4VwF2TlybKp8ecZ2eQEzQ4UYeW_7/exec')
+        .then(response => response.json())
+        .then(data => {
+          // Find the div
+          var outputDiv = document.getElementById('output');
+
+          // Turn the data into a string
+          var outputString = JSON.stringify(data);
+
+          // Set the div's content to the data
+          outputDiv.textContent = outputString;
+        });
+      }, 120000); // 2 minutes
+    </script>
+  </head>
+  <body>
+    <!-- Your webpage content here -->
+    <div id="output"></div>
+  </body>
 </html>
