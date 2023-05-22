@@ -28,11 +28,15 @@
             var tableRow = document.createElement('tr');
             table.appendChild(tableRow);
 
-            // For each cell in the row, add a table cell
-            // Start at column 2 (C) and end at column 6 (G)
-            for (var i = 2; i < 7; i++) {
+            // Parse and format the time
+            var time = new Date(row[4]);
+            var formattedTime = time.getUTCHours() + ':' + (time.getUTCMinutes() === 0 ? '' : time.getUTCMinutes());
+
+            // Add the name, time, # of meals, and comments to the row
+            var columns = [row[2], formattedTime, row[5], row[6]];
+            for (var i = 0; i < columns.length; i++) {
               var tableCell = document.createElement(index === 0 ? 'th' : 'td');
-              tableCell.textContent = row[i];
+              tableCell.textContent = columns[i];
               tableRow.appendChild(tableCell);
             }
           });
