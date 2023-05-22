@@ -30,7 +30,17 @@
 
             // Parse and format the time
             var time = new Date(row[4]);
-            var formattedTime = (time.getUTCMinutes() === 0) ? time.getUTCHours().toString() : time.getUTCHours().toString() + ":" + time.getUTCMinutes().toString();
+            var hour = time.getUTCHours();
+            var minute = time.getUTCMinutes();
+
+            // Convert to 12 hour format
+            if(hour > 12) {
+              hour -= 12;
+            }
+
+            // Format minutes
+            var formattedMinute = (minute === 0) ? '' : ':' + minute.toString();
+            var formattedTime = hour.toString() + formattedMinute;
 
             // Add the name, time, # of meals, and comments to the row
             var columns = [row[2], formattedTime, row[5], row[6]];
