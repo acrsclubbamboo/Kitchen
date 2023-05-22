@@ -16,7 +16,8 @@
 
           // Set the div's content to the data
           outputDiv.textContent = outputString;
-        });
+        })
+        .catch(error => console.error('Error:', error));  // Add this line
       }, 5000); // Reduced to 5 seconds for testing
     </script>
   </head>
