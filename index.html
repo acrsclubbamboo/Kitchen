@@ -4,20 +4,36 @@
     <!-- Other head tags here -->
     <script>
       setInterval(function() {
-        console.log('Fetching data...');  // Add this line
+        console.log('Fetching data...');
         fetch('https://script.google.com/macros/s/AKfycbw6HdkhKYFk-CX7wzGC3CAz4aHJo2ZNDzxYQbY_4VwF2TlybKp8ecZ2eQEzQ4UYeW_7/exec')
         .then(response => response.json())
         .then(data => {
-          // Find the div
           var outputDiv = document.getElementById('output');
 
-          // Turn the data into a string
-          var outputString = JSON.stringify(data);
+          // Clear previous data
+          outputDiv.innerHTML = '';
 
-          // Set the div's content to the data
-          outputDiv.textContent = outputString;
+          // Loop over each row in the data
+          data.forEach((row, index) => {
+            // Skip rows that don't have at least three columns
+            if (row.length < 3) {
+              return;
+            }
+
+            // If it's the first row, add a heading
+            if (index === 0) {
+              var heading = document.createElement('h2');
+              heading.textContent = row[2];
+              outputDiv.appendChild(heading);
+            } else {
+              // For other rows, add the name to a list
+              var listItem = document.createElement('li');
+              listItem.textContent = row[2];
+              outputDiv.appendChild(listItem);
+            }
+          });
         })
-        .catch(error => console.error('Error:', error));  // Add this line
+        .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
     </script>
   </head>
