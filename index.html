@@ -4,6 +4,7 @@
     <!-- Other head tags here -->
     <script>
       setInterval(function() {
+        console.log('Fetching data...');  // Add this line
         fetch('https://script.google.com/macros/s/AKfycbw6HdkhKYFk-CX7wzGC3CAz4aHJo2ZNDzxYQbY_4VwF2TlybKp8ecZ2eQEzQ4UYeW_7/exec')
         .then(response => response.json())
         .then(data => {
@@ -16,7 +17,7 @@
           // Set the div's content to the data
           outputDiv.textContent = outputString;
         });
-      }, 120000); // 2 minutes
+      }, 5000); // Reduced to 5 seconds for testing
     </script>
   </head>
   <body>
