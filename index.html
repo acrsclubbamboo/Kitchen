@@ -13,23 +13,26 @@
           // Clear previous data
           outputDiv.innerHTML = '';
 
+          // Create a table
+          var table = document.createElement('table');
+          outputDiv.appendChild(table);
+
           // Loop over each row in the data
           data.forEach((row, index) => {
-            // Skip rows that don't have at least three columns
-            if (row.length < 3) {
+            // Skip rows that don't have the necessary columns
+            if (row.length < 4) {
               return;
             }
 
-            // If it's the first row, add a heading
-            if (index === 0) {
-              var heading = document.createElement('h2');
-              heading.textContent = row[2];
-              outputDiv.appendChild(heading);
-            } else {
-              // For other rows, add the name to a list
-              var listItem = document.createElement('li');
-              listItem.textContent = row[2];
-              outputDiv.appendChild(listItem);
+            // Create a new row in the table
+            var tableRow = document.createElement('tr');
+            table.appendChild(tableRow);
+
+            // For each cell in the row, add a table cell
+            for (var i = 0; i < 4; i++) {
+              var tableCell = document.createElement(index === 0 ? 'th' : 'td');
+              tableCell.textContent = row[i];
+              tableRow.appendChild(tableCell);
             }
           });
         })
