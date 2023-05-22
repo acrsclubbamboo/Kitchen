@@ -29,7 +29,7 @@
             table.appendChild(tableRow);
 
             // Add the name, time, # of meals, and comments to the row
-            var columns = [row[2], row[4], row[5], row[6]];  // Note the replacement of formattedTime with row[4]
+            var columns = [row[2], row[4].split('T')[1].substring(0, 5), row[5], row[6]];
             for (var i = 0; i < columns.length; i++) {
               var tableCell = document.createElement(index === 0 ? 'th' : 'td');
               tableCell.textContent = columns[i];
