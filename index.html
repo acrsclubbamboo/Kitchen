@@ -39,7 +39,7 @@
                   var dateString = dateObject.toUTCString();
                   var dateParts = dateString.split(' ');
                   if (dateParts.length > 4) {
-                    timeString = dateParts[4].substring(0, 5);
+                    timeString = dateObject.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Los_Angeles' });
                   }
                 }
               } else {
