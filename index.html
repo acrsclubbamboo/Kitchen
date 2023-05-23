@@ -7,6 +7,12 @@
         font-size: 20px; /* Increase font size */
       }
 
+      th {
+        font-weight: bold; /* Make headers bold */
+        text-align: center; /* Center headers */
+        padding-right: 15px; /* Add a gap after each header */
+      }
+
       td:nth-child(3), th:nth-child(3) {
         text-align: center; /* Center # of meals column */
       }
@@ -25,6 +31,16 @@
           // Create a table
           var table = document.createElement('table');
           outputDiv.appendChild(table);
+
+          // Add header row
+          var headerRow = document.createElement('tr');
+          var headers = ["Name", "Time", "# of Meals", "Comments"];
+          headers.forEach(header => {
+            var th = document.createElement('th');
+            th.textContent = header;
+            headerRow.appendChild(th);
+          });
+          table.appendChild(headerRow);
 
           // Loop over each row in the data
           data.forEach((row, index) => {
@@ -59,7 +75,7 @@
             var columns = [row[2], timeString, row[5], row[6]];
             
             for (var i = 0; i < columns.length; i++) {
-              var tableCell = document.createElement(index === 0 ? 'th' : 'td');
+              var tableCell = document.createElement('td');
               tableCell.textContent = columns[i];
               tableRow.appendChild(tableCell);
             }
