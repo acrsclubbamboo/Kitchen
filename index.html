@@ -44,8 +44,8 @@
 
           // Loop over each row in the data
           data.forEach((row, index) => {
-            // Skip rows that don't have the necessary columns
-            if (row.length < 7) {
+            // Skip the first 2 rows and rows that don't have the necessary columns
+            if (index < 2 || row.length < 7) {
               return;
             }
 
