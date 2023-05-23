@@ -68,6 +68,9 @@
               } else {
                 timeString = row[4]; // If not a Date, use the original value
               }
+            } else {
+              // Default value if Time is empty
+              timeString = "12:00 PM";
             }
 
             var columns = [row[2], timeString, row[5], row[6]];
