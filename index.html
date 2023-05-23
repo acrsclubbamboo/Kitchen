@@ -13,12 +13,13 @@
         padding-right: 15px; /* Add a gap after each header */
       }
 
-      td:nth-child(3), th:nth-child(3) {
-        text-align: center; /* Center # of meals column */
+      td:nth-child(2), th:nth-child(2) {
+        text-align: center; /* Center Time column */
       }
 
       /* Style for the total meals and veggie count */
       .totals {
+        font-size: 30px; /* Make font bigger */
         font-weight: bold;
         font-style: italic;
         padding-right: 30px; /* Add more space to the right */
@@ -27,6 +28,12 @@
       /* Style for the green veggie meals count */
       .veggie {
         color: green;
+      }
+
+      img {
+        display: block;
+        margin-top: 30px;
+        max-width: 100%;
       }
 
     </style>
@@ -108,6 +115,11 @@
               tableRow.appendChild(tableCell);
             }
           });
+        }).then(() => {
+          // Add image after the table
+          var image = document.createElement('img');
+          image.src = 'https://example.com/your-image.jpg'; // Replace with your image URL
+          outputDiv.appendChild(image);
         })
         .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
