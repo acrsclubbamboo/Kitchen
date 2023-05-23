@@ -33,15 +33,20 @@
             // Check the validity of the time value before creating a Date object and calling substring
             var timeString = '';
             if (row[4]) {
-              var dateObject = new Date(row[4]);
-              if (dateObject instanceof Date && !isNaN(dateObject)) {
-                var dateString = dateObject.toUTCString();
-                var dateParts = dateString.split(' ');
-                if (dateParts.length > 4) {
-                  timeString = dateParts[4].substring(0, 5);
+              if(typeof row[4] == 'string' && row[4].includes('T')) {
+                var dateObject = new Date(row[4]);
+                if (dateObject instanceof Date && !isNaN(dateObject)) {
+                  var dateString = dateObject.toUTCString();
+                  var dateParts = dateString.split(' ');
+                  if (dateParts.length > 4) {
+                    timeString = dateParts[4].substring(0, 5);
+                  }
                 }
+              } else {
+                timeString = row[4]; // If not a Date, use the original value
               }
             }
+
             var columns = [row[2], timeString, row[5], row[6]];
             
             for (var i = 0; i < columns.length; i++) {
