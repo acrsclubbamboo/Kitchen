@@ -110,11 +110,6 @@
               tableRow.appendChild(tableCell);
             }
           });
-        }).then(() => {
-          // Add image after the table
-          var image = document.createElement('img');
-          image.src = 'https://i.imgur.com/Flpgldl.jpeg'; // Replace with your image URL
-          outputDiv.appendChild(image);
         })
         .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
