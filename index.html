@@ -21,7 +21,12 @@
       .totals {
         font-weight: bold;
         font-style: italic;
-        padding-right: 15px; /* Add space to the right */
+        padding-right: 30px; /* Add more space to the right */
+      }
+
+      /* Style for the green veggie meals count */
+      .veggie {
+        color: green;
       }
 
     </style>
@@ -42,13 +47,16 @@
 
           // Add totals row
           var totalsRow = document.createElement('tr');
-          var totals = ["Reserved Meals: " + data[0][0], data[0][1] + " Veggie meals"];
-          totals.forEach(total => {
-            var td = document.createElement('td');
-            td.textContent = total;
-            td.classList.add('totals'); // Add class for styling
-            totalsRow.appendChild(td);
-          });
+          var totalCell = document.createElement('td');
+          totalCell.textContent = data[0][4]; // E1 cell content
+          totalCell.classList.add('totals'); // Add class for styling
+          totalsRow.appendChild(totalCell);
+
+          var veggieCell = document.createElement('td');
+          veggieCell.textContent = data[0][6]; // G1 cell content
+          veggieCell.classList.add('totals', 'veggie'); // Add classes for styling
+          totalsRow.appendChild(veggieCell);
+
           table.appendChild(totalsRow);
 
           // Add header row
