@@ -28,6 +28,8 @@
             var tableRow = document.createElement('tr');
             table.appendChild(tableRow);
 
+            console.log(row[4]);
+
             // Add the name, time, # of meals, and comments to the row
             var columns = [row[2], (new Date(row[4])).toUTCString().split(' ')[4].substring(0,5), row[5], row[6]];
             for (var i = 0; i < columns.length; i++) {
