@@ -32,6 +32,16 @@
           var table = document.createElement('table');
           outputDiv.appendChild(table);
 
+          // Add totals row
+          var totalsRow = document.createElement('tr');
+          var totals = ["Total # of meals: " + data[0][4], "# Veggie: " + data[1][5]];
+          totals.forEach(total => {
+            var td = document.createElement('td');
+            td.textContent = total;
+            totalsRow.appendChild(td);
+          });
+          table.appendChild(totalsRow);
+
           // Add header row
           var headerRow = document.createElement('tr');
           var headers = ["Name", "Time", "# of Meals", "Comments"];
