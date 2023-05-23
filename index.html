@@ -16,6 +16,14 @@
       td:nth-child(3), th:nth-child(3) {
         text-align: center; /* Center # of meals column */
       }
+
+      /* Style for the total meals and veggie count */
+      .totals {
+        font-weight: bold;
+        font-style: italic;
+        padding-right: 15px; /* Add space to the right */
+      }
+
     </style>
     <script>
       setInterval(function() {
@@ -38,6 +46,7 @@
           totals.forEach(total => {
             var td = document.createElement('td');
             td.textContent = total;
+            td.classList.add('totals'); // Add class for styling
             totalsRow.appendChild(td);
           });
           table.appendChild(totalsRow);
@@ -51,6 +60,7 @@
             headerRow.appendChild(th);
           });
           table.appendChild(headerRow);
+
 
           // Loop over each row in the data
           data.forEach((row, index) => {
