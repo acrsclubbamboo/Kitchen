@@ -42,7 +42,7 @@
 
           // Add totals row
           var totalsRow = document.createElement('tr');
-          var totals = ["Total # of meals: " + data[0][4], "# Veggie: " + data[1][5]];
+          var totals = ["Total # of meals: " + data[0][0], data[0][1] + " Veggie meals"];
           totals.forEach(total => {
             var td = document.createElement('td');
             td.textContent = total;
@@ -60,7 +60,6 @@
             headerRow.appendChild(th);
           });
           table.appendChild(headerRow);
-
 
           // Loop over each row in the data
           data.forEach((row, index) => {
