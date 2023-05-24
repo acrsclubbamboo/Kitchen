@@ -93,14 +93,14 @@
           // Check if there are any reservations left
           var hasReservations = data.some((row, index) => index >= 2 && row[2]);
           if (!hasReservations) {
-            var noReservationsRow = document.createElement('tr');
-            var noReservationsCell = document.createElement('td');
-            noReservationsCell.textContent = data[0][6]; // G1 cell content
-            noReservationsCell.classList.add('totals'); // Add class for styling
-            noReservationsCell.colSpan = 4; // span it across 4 columns
-            noReservationsRow.appendChild(noReservationsCell);
-            table.appendChild(noReservationsRow);
-            return; // Stop further execution
+              var noReservationsRow = document.createElement('tr');
+              var noReservationsCell = document.createElement('td');
+              noReservationsCell.textContent = "No Reservations Left: " + data[0][6]; // Include G1 cell content in the message
+              noReservationsCell.classList.add('totals'); // Add class for styling
+              noReservationsCell.colSpan = 4; // span it across 4 columns
+              noReservationsRow.appendChild(noReservationsCell);
+              table.appendChild(noReservationsRow);
+              return; // Stop further execution
           }
           
           // Add header row
