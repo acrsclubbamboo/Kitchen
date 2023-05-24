@@ -11,6 +11,7 @@
         font-size: 30px; /* Increase font size for headers */
         font-weight: bold; /* Make headers bold */
         text-align: center; /* Center headers */
+        background-color: white;
       }
 
       td {
@@ -31,11 +32,21 @@
         font-style: italic;
         padding-right: 30px; /* Add more space to the right */
         font-size: 32px; /* Bigger size for the totals row */
+        background-color: white;
       }
 
       /* Style for the green veggie meals count */
       .veggie {
         color: green;
+      }
+
+      /* Alternate row colors */
+      tr:nth-child(odd) {
+        background-color: #f2f2f2; /* light gray for odd rows */
+      }
+
+      tr:nth-child(even) {
+        background-color: #e6ffff; /* light blue for even rows */
       }
 
     </style>
