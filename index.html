@@ -3,13 +3,18 @@
   <head>
     <!-- Other head tags here -->
     <style>
+      body {
+        padding: 0;  /* No padding on the sides */
+        margin: 0;  /* No margin */
+      }
+
       #output {
         display: flex;
         justify-content: center; 
-        align-items: center;
+        align-items: flex-start;  /* Align to the top */
         height: 100vh;
       }
-
+      
       table {
         font-size: 24px; /* Increase font size */
         margin: auto;
