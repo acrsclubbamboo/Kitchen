@@ -3,8 +3,16 @@
   <head>
     <!-- Other head tags here -->
     <style>
+      #output {
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        height: 100vh;
+      }
+
       table {
         font-size: 24px; /* Increase font size */
+        margin: auto;
       }
 
       th {
@@ -42,7 +50,7 @@
 
       /* Alternate row colors */
       tr:nth-child(odd) {
-        background-color: #b3d9ff; /* light blue
+        background-color: #b3d9ff; /* light blue */
       }
 
       tr:nth-child(even) {
@@ -68,13 +76,15 @@
           // Add totals row
           var totalsRow = document.createElement('tr');
           var totalCell = document.createElement('td');
-          totalCell.textContent = data[0][4]; // E1 cell content
+          totalCell.textContent = 'Total Meals: ' + data[0][4]; // E1 cell content
           totalCell.classList.add('totals'); // Add class for styling
+          totalCell.colSpan = 2; // span it across 2 columns
           totalsRow.appendChild(totalCell);
 
           var veggieCell = document.createElement('td');
-          veggieCell.textContent = data[0][6]; // G1 cell content
+          veggieCell.textContent = 'Veggie Meals: ' + data[0][6]; // G1 cell content
           veggieCell.classList.add('totals', 'veggie'); // Add classes for styling
+          veggieCell.colSpan = 2; // span it across 2 columns
           totalsRow.appendChild(veggieCell);
 
           table.appendChild(totalsRow);
