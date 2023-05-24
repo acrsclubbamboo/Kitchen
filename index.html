@@ -100,6 +100,11 @@
               noReservationsCell.colSpan = 4; // span it across 4 columns
               noReservationsRow.appendChild(noReservationsCell);
               table.appendChild(noReservationsRow);
+
+              // Adjust table style for empty reservation
+              table.style.margin = "auto";
+              table.style.padding = "20px 0";
+            
               return; // Stop further execution
           }
           
