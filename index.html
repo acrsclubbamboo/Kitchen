@@ -3,7 +3,6 @@
   <head>
     <!-- Other head tags here -->
     <style>
-      /* Your existing CSS styles */
       body {
         padding: 0;  /* No padding on the sides */
         margin: 0;  /* No margin */
@@ -31,6 +30,7 @@
         max-width: 500px; /* Add a max-width */
         word-wrap: break-word; /* Add word wrap */
       }
+
       td:nth-child(2), th:nth-child(2) {
         text-align: center; /* Center Time column */
       }
@@ -57,97 +57,106 @@
       tr:nth-child(even) {
         background-color: white;
       }
+
     </style>
     <script>
-    setInterval(function() {
-      console.log('Fetching data...');
-      fetch('https://script.google.com/macros/s/AKfycbw6HdkhKYFk-CX7wzGC3CAz4aHJo2ZNDzxYQbY_4VwF2TlybKp8ecZ2eQEzQ4UYeW_7/exec')
-      .then(response => response.json())
-      .then(data => {
-        var outputDiv = document.getElementById('output');
+      setInterval(function() {
+        console.log('Fetching data...');
+        fetch('https://script.google.com/macros/s/AKfycbw6HdkhKYFk-CX7wzGC3CAz4aHJo2ZNDzxYQbY_4VwF2TlybKp8ecZ2eQEzQ4UYeW_7/exec')
+        .then(response => response.json())
+        .then(data => {
+          var outputDiv = document.getElementById('output');
 
-        // Clear previous data
-        outputDiv.innerHTML = '';
+          // Clear previous data
+          outputDiv.innerHTML = '';
 
-        // Create a table for the current reservations
-        var currentTable = document.createElement('table');
-        outputDiv.appendChild(currentTable);
+          // Create a table
+          var table = document.createElement('table');
+          outputDiv.appendChild(table);
 
-        // Populate the current reservations table
-        var currentHeaderRow = document.createElement('tr');
-        var currentHeaders = ["Name", "Time", "# of Meals", "Comments"];
-        currentHeaders.forEach(header => {
-          var th = document.createElement('th');
-          th.textContent = header;
-          currentHeaderRow.appendChild(th);
-        });
-        currentTable.appendChild(currentHeaderRow);
+          // Add totals row
+          var totalsRow = document.createElement('tr');
+          var totalCell = document.createElement('td');
+          totalCell.textContent = data[0][4]; // E1 cell content
+          totalCell.classList.add('totals'); // Add class for styling
+          totalCell.colSpan = 2; // span it across 2 columns
+          totalsRow.appendChild(totalCell);
 
-        // Loop over each row in the data
-        data.currentReservationsData.forEach((row, index) => {
+          var veggieCell = document.createElement('td');
+          veggieCell.textContent = data[0][6]; // G1 cell content
+          veggieCell.classList.add('totals', 'veggie'); // Add classes for styling
+          veggieCell.colSpan = 2; // span it across 2 columns
+          totalsRow.appendChild(veggieCell);
 
-          // Create a new row in the table
-          var currentTableRow = document.createElement('tr');
-          currentTable.appendChild(currentTableRow);
+          table.appendChild(totalsRow);
 
-          // Check the validity of the time value before creating a Date object and calling substring
-          var timeString = '';
-          if (row.time) {
-            if(typeof row.time == 'string' && row.time.includes('T')) {
-              var dateObject = new Date(row.time);
-              if (dateObject instanceof Date && !isNaN(dateObject)) {
-                var dateString = dateObject.toUTCString();
-                var dateParts = dateString.split(' ');
-                if (dateParts.length > 4) {
-                  timeString = dateObject.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Los_Angeles' });
+          // Check if there are any reservations left
+          var hasReservations = data.some((row, index) => index >= 2 && row[2]);
+          if (!hasReservations) {
+              var noReservationsRow = document.createElement('tr');
+              var noReservationsCell = document.createElement('td');
+              noReservationsCell.textContent = data[0][2]; // Include C1 cell content in the message
+              noReservationsCell.classList.add('totals'); // Add class for styling
+              noReservationsCell.colSpan = 4; // span it across 4 columns
+              noReservationsRow.appendChild(noReservationsCell);
+              table.appendChild(noReservationsRow);
+
+              // Adjust table style for empty reservation
+              table.style.margin = "auto";
+              table.style.padding = "20px 0";
+            
+              return; // Stop further execution
+          }
+          
+          // Add header row
+          var headerRow = document.createElement('tr');
+          var headers = ["Name", "Time", "# of Meals", "Comments"];
+          headers.forEach(header => {
+            var th = document.createElement('th');
+            th.textContent = header;
+            headerRow.appendChild(th);
+          });
+          table.appendChild(headerRow);
+
+          // Loop over each row in the data
+          data.forEach((row, index) => {
+            // Skip the first 2 rows and rows that don't have the necessary columns
+            if (index < 2 || row.length < 7) {
+              return;
+            }
+
+            // Create a new row in the table
+            var tableRow = document.createElement('tr');
+            table.appendChild(tableRow);
+
+            // Check the validity of the time value before creating a Date object and calling substring
+            var timeString = '';
+            if (row[4]) {
+              if(typeof row[4] == 'string' && row[4].includes('T')) {
+                var dateObject = new Date(row[4]);
+                if (dateObject instanceof Date && !isNaN(dateObject)) {
+                  var dateString = dateObject.toUTCString();
+                  var dateParts = dateString.split(' ');
+                  if (dateParts.length > 4) {
+                    timeString = dateObject.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'America/Los_Angeles' });
+                  }
                 }
+              } else {
+                timeString = row[4]; // If not a Date, use the original value
               }
             } else {
-              timeString = row.time; // If not a Date, use the original value
+              // Default value if Time is empty
+              timeString = "12:00";
             }
-          } else {
-            // Default value if Time is empty
-            timeString = "12:00";
-          }
 
-          var columns = [row.name, timeString, row.numberOfMeals, row.comments];
-
-          for (var i = 0; i < columns.length; i++) {
-            var currentTableCell = document.createElement('td');
-            currentTableCell.textContent = columns[i];
-            currentTableRow.appendChild(currentTableCell);
-          }
-        });
-        // Add a break between the tables
-        var breakLine = document.createElement('br');
-        outputDiv.appendChild(breakLine);
-
-        // Create a table for the future reservations
-        var futureTable = document.createElement('table');
-        outputDiv.appendChild(futureTable);
-
-        // Populate the future reservations table
-        var futureHeaderRow = document.createElement('tr');
-        var futureHeaders = ["Day", "Date", "Formatted Date", "# of Reservations"];
-        futureHeaders.forEach(header => {
-          var th = document.createElement('th');
-          th.textContent = header;
-          futureHeaderRow.appendChild(th);
-        });
-        futureTable.appendChild(futureHeaderRow);
-
-        data.futureReservationsData.forEach((row) => {
-            var futureTableRow = document.createElement('tr');
-            futureTable.appendChild(futureTableRow);
-
-            var columns = [row.dayDescription, row.date, row.formattedDate, row.numberOfReservations];
-
+            var columns = [row[2], timeString, row[5], row[6]];
+            
             for (var i = 0; i < columns.length; i++) {
-                var futureTableCell = document.createElement('td');
-                futureTableCell.textContent = columns[i];
-                futureTableRow.appendChild(futureTableCell);
+              var tableCell = document.createElement('td');
+              tableCell.textContent = columns[i];
+              tableRow.appendChild(tableCell);
             }
-        });
+          });
         })
         .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
@@ -158,4 +167,3 @@
     <div id="output"></div>
   </body>
 </html>
-
