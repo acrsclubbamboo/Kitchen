@@ -65,6 +65,7 @@
         fetch('https://script.google.com/macros/s/AKfycbyw5AviSqLZnsyrduNjATqGK0iZ8d6Fn2is_B-q6dMmXTKfw_A3bAjd9RaImQJrP6r6/exec')
         .then(response => response.json())
         .then(data => {
+          console.log(data);
           var outputDiv = document.getElementById('output');
 
           // Clear previous data
