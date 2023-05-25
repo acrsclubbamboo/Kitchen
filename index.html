@@ -78,13 +78,13 @@
           // Add totals row
           var totalsRow = document.createElement('tr');
           var totalCell = document.createElement('td');
-          totalCell.textContent = data.KitchenData[0][4]; // E1 cell content
+          totalCell.textContent = data.kitchenData[0][4]; // E1 cell content
           totalCell.classList.add('totals'); // Add class for styling
           totalCell.colSpan = 2; // span it across 2 columns
           totalsRow.appendChild(totalCell);
 
           var veggieCell = document.createElement('td');
-          veggieCell.textContent = data.KitchenData[0][6]; // G1 cell content
+          veggieCell.textContent = data.kitchenData[0][6]; // G1 cell content
           veggieCell.classList.add('totals', 'veggie'); // Add classes for styling
           veggieCell.colSpan = 2; // span it across 2 columns
           totalsRow.appendChild(veggieCell);
@@ -92,11 +92,11 @@
           table.appendChild(totalsRow);
 
           // Check if there are any reservations left
-          var hasReservations = data.some((row, index) => index >= 2 && row[2]);
+          var hasReservations = data.kitchenData.some((row, index) => index >= 2 && row[2]);
           if (!hasReservations) {
               var noReservationsRow = document.createElement('tr');
               var noReservationsCell = document.createElement('td');
-              noReservationsCell.textContent = data.KitchenData[0][2]; // Include C1 cell content in the message
+              noReservationsCell.textContent = data.kitchenData[0][2]; // Include C1 cell content in the message
               noReservationsCell.classList.add('totals'); // Add class for styling
               noReservationsCell.colSpan = 4; // span it across 4 columns
               noReservationsRow.appendChild(noReservationsCell);
@@ -120,7 +120,7 @@
           table.appendChild(headerRow);
 
           // Loop over each row in the data
-          data.KitchenData.forEach((row, index) => {
+          data.kitchenData.forEach((row, index) => {
             // Skip the first 2 rows and rows that don't have the necessary columns
             if (index < 2 || row.length < 7) {
               return;
