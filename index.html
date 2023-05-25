@@ -60,7 +60,7 @@
 
     </style>
     <script>
-      setInterval(function() {
+       setInterval(function() {
         console.log('Fetching data...');
         fetch('https://script.google.com/macros/s/AKfycbw6HdkhKYFk-CX7wzGC3CAz4aHJo2ZNDzxYQbY_4VwF2TlybKp8ecZ2eQEzQ4UYeW_7/exec')
         .then(response => response.json())
@@ -157,10 +157,42 @@
               tableRow.appendChild(tableCell);
             }
           });
+
+          // Add a break between the tables
+          var breakLine = document.createElement('br');
+          outputDiv.appendChild(breakLine);
+
+          // Create a table for future reservations
+          var futureTable = document.createElement('table');
+          outputDiv.appendChild(futureTable);
+
+          // Add header row for future reservations
+          var futureHeaderRow = document.createElement('tr');
+          var futureHeaders = ["Day", "Formatted Date", "# of Reservations"];
+          futureHeaders.forEach(header => {
+            var th = document.createElement('th');
+            th.textContent = header;
+            futureHeaderRow.appendChild(th);
+          });
+          futureTable.appendChild(futureHeaderRow);
+
+          // Loop over each row in the futureReservationsData
+          data.futureReservationsData.forEach((row) => {
+            var futureTableRow = document.createElement('tr');
+            futureTable.appendChild(futureTableRow);
+
+            var columns = [row.dayDescription, row.formattedDate, row.numberOfReservations];
+
+            for (var i = 0; i < columns.length; i++){
+              var tableCell = document.createElement('td');
+              tableCell.textContent = columns[i];
+              futureTableRow.appendChild(tableCell);
+            }
+          });
         })
         .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
-    </script>
+  </script>
   </head>
   <body>
     <!-- Your webpage content here -->
