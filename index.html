@@ -91,11 +91,11 @@
           table.appendChild(totalsRow);
 
           // Check if there are any reservations left
-          var hasReservations = data.some((row, index) => index >= 2 && row[2]);
+          var hasReservations = data.some((row, index) => row[3] > 0);
           if (!hasReservations) {
               var noReservationsRow = document.createElement('tr');
               var noReservationsCell = document.createElement('td');
-              noReservationsCell.textContent = data[0][2]; // Include C1 cell content in the message
+              noReservationsCell.textContent = 'No reservations available'; // Set the message
               noReservationsCell.classList.add('totals'); // Add class for styling
               noReservationsCell.colSpan = 4; // span it across 4 columns
               noReservationsRow.appendChild(noReservationsCell);
@@ -104,10 +104,10 @@
               // Adjust table style for empty reservation
               table.style.margin = "auto";
               table.style.padding = "20px 0";
-            
+
               return; // Stop further execution
           }
-          
+
           // Add header row
           var headerRow = document.createElement('tr');
           var headers = ["Name", "Time", "# of Meals", "Comments"];
