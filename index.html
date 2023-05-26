@@ -57,12 +57,20 @@
       tr:nth-child(even) {
         background-color: white;
       }
+      .table-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+      }
 
+      .table-container > div {
+        margin: 20px;
+      }
     </style>
     <script>
        setInterval(function() {
         console.log('Fetching data...');
-        fetch('https://script.google.com/macros/s/AKfycbyw5AviSqLZnsyrduNjATqGK0iZ8d6Fn2is_B-q6dMmXTKfw_A3bAjd9RaImQJrP6r6/exec')
+        fetch('https://script.google.com/macros/s/AKfycbyzMUxdsMg5S9m0ZPjg9yHH5x9sb20B97GXIipAlHLVWNWHloYfS4YflTUfPE9okjPF/exec')
         .then(response => response.json())
         .then(data => {
           console.log(data);
@@ -190,13 +198,43 @@
               futureTableRow.appendChild(tableCell);
             }
           });
+          // Create a table for large orders
+          var largeOrdersTable = document.createElement('table');
+          outputDiv.appendChild(largeOrdersTable);
+
+          // Add header row for large orders
+          var largeOrdersHeaderRow = document.createElement('tr');
+          var largeOrdersHeaders = ["Date", "Reservations"];
+          largeOrdersHeaders.forEach(header => {
+            var th = document.createElement('th');
+            th.textContent = header;
+            largeOrdersHeaderRow.appendChild(th);
+          });
+          largeOrdersTable.appendChild(largeOrdersHeaderRow);
+
+          // Loop over each row in the largeOrdersData
+          data.largeOrdersData.forEach((row) => {
+            var largeOrdersTableRow = document.createElement('tr');
+            largeOrdersTable.appendChild(largeOrdersTableRow);
+
+            var columns = [row.date, row.reservations]; // this represents the data from columns G and H
+
+            for (var i = 0; i < columns.length; i++){
+              var tableCell = document.createElement('td');
+              tableCell.textContent = columns[i];
+              largeOrdersTableRow.appendChild(tableCell);
+            }
+          });
         })
         .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
-  </script>
+    </script>
   </head>
   <body>
     <!-- Your webpage content here -->
     <div id="output"></div>
   </body>
 </html>
+
+
+
