@@ -65,7 +65,7 @@
       .table-container {
         display: flex;
         justify-content: space-around;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
       }
 
       .table-container > div {
@@ -176,12 +176,17 @@
           var breakLine = document.createElement('br');
           outputDiv.appendChild(breakLine);
 
+          // Create the container for the second and third tables
+          var tableContainer = document.createElement('div');
+          tableContainer.className = 'table-container';
+          outputDiv.appendChild(tableContainer);
+
           // Create a table for future reservations
           var futureTable = document.createElement('table');
           var futureReservationsTitle = document.createElement('h2');
           futureReservationsTitle.textContent = "Future Reservations";
-          outputDiv.appendChild(futureReservationsTitle);
-          outputDiv.appendChild(futureTable);
+          tableContainer.appendChild(futureReservationsTitle); // Changed to tableContainer
+          tableContainer.appendChild(futureTable); // Changed to tableContainer
 
           // Add header row for future reservations
           var futureHeaderRow = document.createElement('tr');
@@ -203,15 +208,18 @@
             for (var i = 0; i < columns.length; i++){
               var tableCell = document.createElement('td');
               tableCell.textContent = columns[i];
-              futureTableRow.appendChild(tableCell);
+              futureTableRow.appendChild(tableCell);              
             }
           });
+          tableContainer.appendChild(futureTable);  // moved this line outside the forEach loop
+          
           // Create a table for large orders
           var largeOrdersTable = document.createElement('table');
           var largeOrdersTitle = document.createElement('h2');
           largeOrdersTitle.textContent = "Large Orders";
-          outputDiv.appendChild(largeOrdersTitle);
-          outputDiv.appendChild(largeOrdersTable);
+          tableContainer.appendChild(largeOrdersTitle); // Changed to tableContainer
+          tableContainer.appendChild(largeOrdersTable); // Changed to tableContainer
+
 
           // Add header row for large orders
           var largeOrdersHeaderRow = document.createElement('tr');
@@ -236,6 +244,7 @@
               largeOrdersTableRow.appendChild(tableCell);
             }
           });
+          tableContainer.appendChild(largeOrdersTable);  // moved this line outside the forEach loop
         })
         .catch(error => console.error('Error:', error));
       }, 5000); // Reduced to 5 seconds for testing
