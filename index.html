@@ -217,7 +217,7 @@
             var largeOrdersTableRow = document.createElement('tr');
             largeOrdersTable.appendChild(largeOrdersTableRow);
 
-            var columns = [row.date, row.reservations]; // this represents the data from columns G and H
+            var columns = [row[0], row[1]];
 
             for (var i = 0; i < columns.length; i++){
               var tableCell = document.createElement('td');
