@@ -22,7 +22,7 @@
       }
       
       th {
-        font-size: 30px; /* Increase font size for headers */
+        font-size: 30x; /* Increase font size for headers */
         font-weight: bold; /* Make headers bold */
         text-align: center; /* Center headers */
         background-color: white;
@@ -135,7 +135,7 @@
           
           // Add header row
           var headerRow = document.createElement('tr');
-          var headers = ["Name", "Time", "# of Meals", "Comments"];
+          var headers = ["Name", "Time", "#", "Comments"];
           headers.forEach(header => {
             var th = document.createElement('th');
             th.textContent = header;
@@ -236,7 +236,7 @@
           var largeOrdersTable = document.createElement('table');
           largeOrdersTable.className = 'styled-table'; // add this line
           var largeOrdersTitle = document.createElement('h2');
-          largeOrdersTitle.textContent = "Large Orders";
+          largeOrdersTitle.textContent = "Large Requests";
           largeOrdersContainer.appendChild(largeOrdersTitle);
           largeOrdersContainer.appendChild(largeOrdersTable);
 
