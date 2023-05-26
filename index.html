@@ -176,6 +176,11 @@
           var breakLine = document.createElement('br');
           outputDiv.appendChild(breakLine);
 
+          // Create the container for the second and third tables
+          var tableContainer = document.createElement('div');
+          tableContainer.className = 'table-container';
+          outputDiv.appendChild(tableContainer);
+          
           // Create a container for future reservations and its title
           var futureContainer = document.createElement('div');
           tableContainer.appendChild(futureContainer);
