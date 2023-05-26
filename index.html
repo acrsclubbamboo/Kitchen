@@ -130,8 +130,8 @@
               table.style.margin = "auto";
               table.style.padding = "20px 0";
             
-              return; // Stop further execution
           }
+          else {
           
           // Add header row
           var headerRow = document.createElement('tr');
@@ -182,7 +182,7 @@
               tableRow.appendChild(tableCell);
             }
           });
-
+          }
           // Add a break between the tables
           // var breakLine = document.createElement('br');
           // .appendChild(breakLine);
