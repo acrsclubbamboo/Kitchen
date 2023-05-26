@@ -173,6 +173,9 @@
 
           // Create a table for future reservations
           var futureTable = document.createElement('table');
+          var futureReservationsTitle = document.createElement('h2');
+          futureReservationsTitle.textContent = "Future Reservations";
+          outputDiv.appendChild(futureReservationsTitle);
           outputDiv.appendChild(futureTable);
 
           // Add header row for future reservations
@@ -200,6 +203,9 @@
           });
           // Create a table for large orders
           var largeOrdersTable = document.createElement('table');
+          var largeOrdersTitle = document.createElement('h2');
+          largeOrdersTitle.textContent = "Large Orders";
+          outputDiv.appendChild(largeOrdersTitle);
           outputDiv.appendChild(largeOrdersTable);
 
           // Add header row for large orders
