@@ -169,7 +169,7 @@
 
           // Add header row for future reservations
           var futureHeaderRow = document.createElement('tr');
-          var futureHeaders = ["Day", "Formatted Date", "# of Reservations"];
+          var futureHeaders = ["Date", "Reservations"];
           futureHeaders.forEach(header => {
             var th = document.createElement('th');
             th.textContent = header;
@@ -182,7 +182,7 @@
             var futureTableRow = document.createElement('tr');
             futureTable.appendChild(futureTableRow);
 
-            var columns = [row.dayDescription, row.formattedDate, row.numberOfReservations];
+            var columns = [row.formattedDate, row.numberOfReservations];
 
             for (var i = 0; i < columns.length; i++){
               var tableCell = document.createElement('td');
